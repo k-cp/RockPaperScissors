@@ -1,4 +1,4 @@
-div {
+div, .container {
     display: flex;
     justify-content: space-between;
 }
@@ -6,4 +6,16 @@ div {
 button {
     padding: 40px;
     border-radius: 10px;
+}
+
+div, .head {
+    display: flex;
+    justify-content: left;
+    gap: 30px;
+    margin: 40px;
+}
+
+div div {
+    display: flex;
+    flex-direction: column;
 }
