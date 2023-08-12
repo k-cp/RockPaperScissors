@@ -18,53 +18,59 @@ function playRound(choice) {
     if (playerChoice == computerChoice) {
        console.log( "Tie");
        p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> Tie!<br>`
-       return
+       
     }
     else if (playerChoice == "rock" && computerChoice == "paper") {
-        computerScore++;
-        console.log("You lose. Paper beats rock");
+        cScore.textContent = ++computerScore;
         p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU LOSE<br>`
-        return
+        
     }
     else if (playerChoice == "rock" && computerChoice == "scissors") {
-        playerScore++;
-        console.log("You win. Rock beats scissors");
+        pScore.textContent = ++playerScore;
         p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU WIN!<br>`
-        return
+        
     }
     else if (playerChoice == "paper" && computerChoice == "scissors") {
-        computerScore++;
-        console.log("You lose. Scissors beats paper");
+        cScore.textContent = ++computerScore;
         p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU LOSE<br>`
-        return
+        
     }
     else if (playerChoice == "paper" && computerChoice == "rock") {
-        playerScore++;
+        pScore.textContent = ++playerScore;
         console.log("You win. Paper beats rock");
         p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU WIN!<br>`
-        return
+        
     }
     else if (playerChoice == "scissors" && computerChoice == "rock") {
-        computerScore++;
-        console.log("You lose. Rock beats scissors");
+        cScore.textContent = ++computerScore;
         p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU LOSE<br>`
-        return
+        
     }
     else if (playerChoice == "scissors" && computerChoice == "paper") {
-        playerScore++;
-        console.log("You win. Scissors beats paper");
+        pScore.textContent = ++playerScore;
         p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU WIN!<br>`
-        return
+        
     }
+    if (playerScore === 5) {
+        p.innerHTML += `YOU  WIN THE ROUND<br>`
+        pScore.textContent = 0;
+        cScore.textContent = 0;
+
+    }
+    else if (computerScore === 5) {
+        p.innerHTML += `COMPUTER  WIN THE ROUND<br>`
+        pScore.textContent = 0;
+        cScore.textContent = 0;
+    }
+    return
 }
 
-
 function game() {
-    playerScore = 0;
-    computerScore = 0;
+
+ 
     for (let i = 1; i <= 5; i++) {
         p.textContent += ('Round $', i);
-        playRound();
+        choices.forEach(choice => choice.addEventListener('click', playRound));
     }
     if (playerScore > computerScore) {
         p.textContent += `Player wins with a score of ${playerScore}`;
@@ -85,6 +91,12 @@ let playerScore = 0;
 let computerScore = 0;
 
 const choices = document.querySelectorAll('.choice');
+const play = document.querySelector('.start');
 const p = document.querySelector('#test');
+const pScore = document.querySelector('#playerScore');
+const cScore = document.querySelector('#computerScore');
+pScore.textContent = 0;
+cScore.textContent = 0;
 
+play.addEventListener('click', game);
 choices.forEach(choice => choice.addEventListener('click', playRound));
