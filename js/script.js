@@ -14,7 +14,6 @@ function getComputerChoice() {
 function playRound(choice) {
     let computerChoice = getComputerChoice();
     let playerChoice = choice.srcElement.id;
-    const p = document.querySelector('#test');
 
     if (playerChoice == computerChoice) {
        console.log( "Tie");
@@ -64,17 +63,20 @@ function game() {
     playerScore = 0;
     computerScore = 0;
     for (let i = 1; i <= 5; i++) {
-        console.log('Round $', i);
+        p.textContent += ('Round $', i);
         playRound();
     }
     if (playerScore > computerScore) {
-        return `Player wins with a score of ${playerScore}`;
+        p.textContent += `Player wins with a score of ${playerScore}`;
+        return
     } 
     else if (playerScore < computerScore) {
-        return `Computer wins with a score of ${computerScore}`;
+        p.textContent += `Computer wins with a score of ${computerScore}`;
+        return
     }
     else {
-        return "Tie";
+        p.textContent += "Tie";
+        return
     }
     
 }
@@ -83,5 +85,6 @@ let playerScore = 0;
 let computerScore = 0;
 
 const choices = document.querySelectorAll('.choice');
+const p = document.querySelector('#test');
 
 choices.forEach(choice => choice.addEventListener('click', playRound));
