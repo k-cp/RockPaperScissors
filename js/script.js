@@ -11,45 +11,50 @@ function getComputerChoice() {
     }
 }
 
-function playRound() {
+function playRound(choice) {
     let computerChoice = getComputerChoice();
-    let playerChoice = prompt("What is your choice?").toLowerCase();
+    let playerChoice = choice.srcElement.id;
+    const p = document.querySelector('#test');
+
     if (playerChoice == computerChoice) {
        console.log( "Tie");
+       p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> Tie!<br>`
        return
     }
     else if (playerChoice == "rock" && computerChoice == "paper") {
         computerScore++;
         console.log("You lose. Paper beats rock");
+        p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU LOSE<br>`
         return
     }
     else if (playerChoice == "rock" && computerChoice == "scissors") {
         playerScore++;
         console.log("You win. Rock beats scissors");
+        p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU WIN!<br>`
         return
     }
     else if (playerChoice == "paper" && computerChoice == "scissors") {
         computerScore++;
         console.log("You lose. Scissors beats paper");
+        p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU LOSE<br>`
         return
     }
     else if (playerChoice == "paper" && computerChoice == "rock") {
         playerScore++;
         console.log("You win. Paper beats rock");
+        p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU WIN!<br>`
         return
     }
     else if (playerChoice == "scissors" && computerChoice == "rock") {
         computerScore++;
         console.log("You lose. Rock beats scissors");
+        p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU LOSE<br>`
         return
     }
     else if (playerChoice == "scissors" && computerChoice == "paper") {
         playerScore++;
         console.log("You win. Scissors beats paper");
-        return
-    }
-    else {
-        console.log("Please input a valid choice");
+        p.innerHTML += `You played ${playerChoice} and the computer played ${computerChoice}<br> YOU WIN!<br>`
         return
     }
 }
@@ -76,4 +81,7 @@ function game() {
 
 let playerScore = 0;
 let computerScore = 0;
-console.log(playRound());
+
+const choices = document.querySelectorAll('.choice');
+
+choices.forEach(choice => choice.addEventListener('click', playRound));
